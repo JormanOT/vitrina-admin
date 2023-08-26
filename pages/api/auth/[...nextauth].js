@@ -16,11 +16,12 @@ export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     session: ({session,token,user}) => {
-      if (adminEmails.includes(session?.user?.email)) {
-        return session;
-      } else {
-        return false;
-      }
+      return session;
+      // if (adminEmails.includes(session?.user?.email)) {
+      //   return session;
+      // } else {
+      //   return false;
+      // }
     },
   },
 };
