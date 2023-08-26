@@ -1,16 +1,21 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import Nav from "@/components/Nav";
-import {useState} from "react";
+import { useState } from "react";
 import Logo from "@/components/Logo";
 
-export default function Layout({children}) {
-  const [showNav,setShowNav] = useState(false);
+export default function Layout({ children }) {
+  const [showNav, setShowNav] = useState(false);
   const { data: session } = useSession();
   if (!session) {
     return (
       <div className="bg-bgGray w-screen h-screen flex items-center">
         <div className="text-center w-full">
-          <button onClick={() => signIn('google')} className="bg-white p-2 px-4 rounded-lg">Login with Google</button>
+          <button onClick={(e) => {
+            e.preventDefault()
+            signIn('google', {
+              callbackUrl: '/',
+            })
+          }} className="bg-white p-2 px-4 rounded-lg">Login with Google</button>
         </div>
       </div>
     );
